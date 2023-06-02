@@ -33,7 +33,7 @@ public class Product extends Menu{
     }
 
     public void setDetail(String detail){
-        this.name = detail;
+        this.detail = detail;
     }
     public String getDetail(){
         return detail;

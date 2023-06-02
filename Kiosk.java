@@ -19,6 +19,7 @@ public class Kiosk {
         screen.cakeMenus();
 
         int orderMenu = 0;
+        int check = 0;
 
         while (true) {
             screen.mainMenuOutput();
@@ -27,57 +28,87 @@ public class Kiosk {
 
             switch (next) {
                 case 1: // 커피를 고름
-                    screen.coffeeListOutput();
+                    screen.coffeeListOutput(); // 커피메뉴
                     System.out.print("메뉴를 골라주세요 : ");
-                    System.out.println();
                     orderMenu = sc.nextInt();
+                    System.out.println();
 
-                    orderMenu -= 1;
+                    orderMenu = orderMenu - 1;
 
                     product.setNum(screen.coffeeList.get(orderMenu).num);
                     product.setName(screen.coffeeList.get(orderMenu).name);
                     product.setPrice(screen.coffeeList.get(orderMenu).price);
                     product.setDetail(screen.coffeeList.get(orderMenu).detail);
 
-                    System.out.println(String.format("%-15s", product.getName()) + "|" + String.format("%-6s", "W " + product.getPrice()) + "|" + product.getDetail());
-                    orderList.add(new Product(product.getNum(), product.getName(), product.getPrice(), product.getDetail()));
-
+                    System.out.println(String.format("%-15s", product.getName()) + "|" + String.format("%-6s", product.getPrice()) + "|" + product.getDetail());
+                    System.out.println("위 메뉴를 장바구니에 추가하시겠습니까?");
+                    System.out.println(String.format("%-10s", "1. 확인") + String.format("%-10s", "2. 취소"));
+                    check = sc.nextInt();
+                    if (check == 1) {
+                        orderList.add(new Product(product.getNum(), product.getName(), product.getPrice(), product.getDetail()));
+                    }
                     System.out.println();
+                    System.out.println("Coffee 가 장바구니에 추가되었습니다.");
                     break;
                 case 2:
                     screen.nonCoffeeMenusOutput();
                     System.out.print("메뉴를 골라주세요 : ");
-                    System.out.println();
                     orderMenu = sc.nextInt();
+                    System.out.println();
 
-                    if (orderMenu == 1) {
-                        orderList.add(screen.nonCoffeeList.get(0));
-                    } else if (orderMenu == 2) {
-                        orderList.add(screen.nonCoffeeList.get(1));
-                    } else if (orderMenu == 3) {
-                        orderList.add(screen.nonCoffeeList.get(2));
-                    } else {
-                        orderList.add(screen.nonCoffeeList.get(3));
+                    orderMenu = orderMenu - 1;
+
+                    product.setNum(screen.nonCoffeeList.get(orderMenu).num);
+                    product.setName(screen.nonCoffeeList.get(orderMenu).name);
+                    product.setPrice(screen.nonCoffeeList.get(orderMenu).price);
+                    product.setDetail(screen.nonCoffeeList.get(orderMenu).detail);
+
+                    System.out.println(String.format("%-15s", product.getName()) + "|" + String.format("%-6s", product.getPrice()) + "|" + product.getDetail());
+                    System.out.println("위 메뉴를 장바구니에 추가하시겠습니까?");
+                    System.out.println(String.format("%-10s", "1. 확인") + String.format("%-10s", "2. 취소"));
+                    check = sc.nextInt();
+                    if (check == 1) {
+                        orderList.add(new Product(product.getNum(), product.getName(), product.getPrice(), product.getDetail()));
                     }
+                    System.out.println();
+                    System.out.println("NonCoffee 가 장바구니에 추가되었습니다.");
                     break;
                 case 3:
                     screen.cakeListOutput();
                     System.out.print("메뉴를 골라주세요 : ");
-                    System.out.println();
                     orderMenu = sc.nextInt();
+                    System.out.println();
 
-                    if (orderMenu == 1) {
-                        orderList.add(screen.cakeList.get(0));
-                    } else if (orderMenu == 2) {
-                        orderList.add(screen.cakeList.get(1));
-                    } else if (orderMenu == 3) {
-                        orderList.add(screen.cakeList.get(2));
-                    } else {
-                        orderList.add(screen.cakeList.get(3));
+                    orderMenu = orderMenu - 1;
+
+                    product.setNum(screen.cakeList.get(orderMenu).num);
+                    product.setName(screen.cakeList.get(orderMenu).name);
+                    product.setPrice(screen.cakeList.get(orderMenu).price);
+                    product.setDetail(screen.cakeList.get(orderMenu).detail);
+
+                    System.out.println(String.format("%-15s", product.getName()) + "|" + String.format("%-6s", product.getPrice()) + "|" + product.getDetail());
+                    System.out.println("위 메뉴를 장바구니에 추가하시겠습니까?");
+                    System.out.println(String.format("%-10s", "1. 확인") + String.format("%-10s", "2. 취소"));
+                    check = sc.nextInt();
+                    if (check == 1) {
+                        orderList.add(new Product(product.getNum(), product.getName(), product.getPrice(), product.getDetail()));
                     }
+                    System.out.println();
+                    System.out.println("Cake 가 장바구니에 추가되었습니다.");
                     break;
                 case 4:
-                    System.out.println("장바구니");
+                    System.out.println("아래와 같이 주문 하시겠습니까?");
+                    System.out.println("[ Orders ]");
+
+                    for(int i =0; i<orderList.size(); i++) {
+                        System.out.println(String.format("%-15s", orderList.get(i).name) + "|" + String.format("%-6s", orderList.get(i).price) + "|" + orderList.get(i).detail);
+                    }
+
+                    System.out.println("[ Total ]");
+
+                    System.out.println();
+                    System.out.println("1. 주문      2. 메뉴판");
+
                     break;
                 case 5:
                     System.out.println("주문 취소");
