@@ -7,42 +7,47 @@ import java.util.Scanner;
 public class Kiosk {
     // main 은 여기서만 가져다 쓰기
     public static void main(String[] args) {
+        Product product = new Product(0, "coffee", 0.0, "detail");
 
         Screen screen = new Screen();
         Scanner sc = new Scanner(System.in);
         List<Product> orderList = new ArrayList<>();
 
-        // 빼내는 리스트 방법이 있고
-        // 그놈에 get은 언제쓰지
+        screen.mainMenu();
+        screen.coffeeMenus();
+        screen.nonCoffeeMenus();
+        screen.cakeMenus();
 
         int orderMenu = 0;
 
-        screen.totalMenu();
-
         while (true) {
-            screen.MainMenu();
+            screen.mainMenuOutput();
             int next = sc.nextInt();
             System.out.println();
 
             switch (next) {
                 case 1: // 커피를 고름
-                    screen.coffeeMenus();
+                    screen.coffeeListOutput();
                     System.out.print("메뉴를 골라주세요 : ");
+                    System.out.println();
                     orderMenu = sc.nextInt();
 
-                    if (orderMenu == 1) { // 커피 메뉴1
-                        orderList.add(screen.coffeeList.get(0));
-                    } else if (orderMenu == 2) {
-                        orderList.add(screen.coffeeList.get(1));
-                    } else if (orderMenu == 3) {
-                        orderList.add(screen.coffeeList.get(2));
-                    } else {
-                        orderList.add(screen.coffeeList.get(3));
-                    }
+                    orderMenu -= 1;
+
+                    product.setNum(screen.coffeeList.get(orderMenu).num);
+                    product.setName(screen.coffeeList.get(orderMenu).name);
+                    product.setPrice(screen.coffeeList.get(orderMenu).price);
+                    product.setDetail(screen.coffeeList.get(orderMenu).detail);
+
+                    System.out.println(String.format("%-15s", product.getName()) + "|" + String.format("%-6s", "W " + product.getPrice()) + "|" + product.getDetail());
+                    orderList.add(new Product(product.getNum(), product.getName(), product.getPrice(), product.getDetail()));
+
+                    System.out.println();
                     break;
                 case 2:
-                    screen.nonCoffeeMenus();
+                    screen.nonCoffeeMenusOutput();
                     System.out.print("메뉴를 골라주세요 : ");
+                    System.out.println();
                     orderMenu = sc.nextInt();
 
                     if (orderMenu == 1) {
@@ -56,8 +61,9 @@ public class Kiosk {
                     }
                     break;
                 case 3:
-                    screen.cakeMenus();
+                    screen.cakeListOutput();
                     System.out.print("메뉴를 골라주세요 : ");
+                    System.out.println();
                     orderMenu = sc.nextInt();
 
                     if (orderMenu == 1) {
@@ -76,12 +82,29 @@ public class Kiosk {
                 case 5:
                     System.out.println("주문 취소");
                     break;
-                default:
-                    System.out.println("메뉴를 다시 선택해주세요");
+                case 6:
+                    break;
             }
-            if (orderMenu == 3) {
+            if (next == 6) {
                 break;
             }
         }
+
+        // set 설정
+//        product.setName("boby");
+//        System.out.println(product.name); // 둘다 동일한 값나옴
+//        System.out.println(product.getName()); // 동일
+
+//        String name = orderList.get(0).name;
+//        double price = orderList.get(0).price;
+//        String detail = orderList.get(0).detail;
+//
+//        for(Menu val: orderList){
+//            System.out.println(String.format("%-15s",val.name) + "|" + val.detail);
+//        }
+//
+//        System.out.println("위 메뉴를 장바구니에 추가하시겠습니까?");
+//        System.out.println(String.format("%-10s","1. 확인") + String.format("%-10s","2. 취소"));
+
     }
 }

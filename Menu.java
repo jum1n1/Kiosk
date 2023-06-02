@@ -3,7 +3,9 @@ package problem.self_problem3;
 //10:40 ~ 11:40/11:55
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class Menu {
     String name;
@@ -18,7 +20,7 @@ public class Menu {
         this.detail = detail;
     }
 
-    // 나중에 -> 데이터도 screen이 아니라 Menu에 옮겨보기
+    Map<Integer, String> intMap = new HashMap<>();
 
 }
 

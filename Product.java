@@ -11,10 +11,32 @@ public class Product extends Menu{
     }
 
     // 외부에 보낼 수 있는 name을 세팅(set)함
+
+    public void setNum(int num){
+        this.num = num;
+    }
+    public int getNum(){
+        return num;
+    }
     public void setName(String name){
         this.name = name;
     }
     public String getName(){
         return name;
     }
+
+    public void setPrice(double price){
+        this.price = price;
+    }
+    public double getPrice(){
+        return price;
+    }
+
+    public void setDetail(String detail){
+        this.name = detail;
+    }
+    public String getDetail(){
+        return detail;
+    }
+
 }
